@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
@@ -24,7 +25,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <header className="bg-black text-white mb-12">
+          <ul className="flex justify-center">
+            <li>
+              <Link href="/" className="hover:bg-gray-600 p-4 cursor-pointer block">
+                ホーム
+              </Link>
+            </li>
+            <li>
+              <Link href="/list" className="hover:bg-gray-600 p-4 cursor-pointer block">
+                社員一覧
+              </Link>
+            </li>
+          </ul>
+        </header>
+        <main>{children}</main>
+      </body>
     </html>
   )
 }

@@ -1,45 +1,17 @@
+import { supabase } from '@/utils/supabaseClient'
 import Link from 'next/link'
 
-export default function ListPage() {
-  // モックデータ: 実際はAPIから取得することを想定
-  const employees = [
-    {
-      id: 1,
-      familyNameKanji: '佐藤',
-      givenNameKanji: '明',
-      familyNameKana: 'さとう',
-      givenNameKana: 'あきら',
-      department: '営業部',
-      position: '一般社員',
-      positive: 3,
-      negative: 1,
-      other: 0,
-    },
-    {
-      id: 2,
-      familyNameKanji: '佐藤',
-      givenNameKanji: '明',
-      familyNameKana: 'さとう',
-      givenNameKana: 'あきら',
-      department: '営業部',
-      position: '一般社員',
-      positive: 3,
-      negative: 1,
-      other: 0,
-    },
-    {
-      id: 3,
-      familyNameKanji: '佐藤',
-      givenNameKanji: '明',
-      familyNameKana: 'さとう',
-      givenNameKana: 'あきら',
-      department: '営業部',
-      position: '一般社員',
-      positive: 3,
-      negative: 1,
-      other: 0,
-    },
-  ]
+export default async function ListPage() {
+  // Supabaseからデータを取得
+  const { data: employees, error } = await supabase.from('employees').select('*')
+
+  if (error) {
+    console.error('データ取得中にエラーが発生しました:', error)
+    return <div>データ取得中にエラーが発生しました</div>
+  }
+
+  const departments = ['開発部', '人事部', '総務部', '経理部']
+  const positions = ['一般社員', 'マネージャ', '課長', '部長']
 
   return (
     <div className="text-center">
@@ -71,8 +43,8 @@ export default function ListPage() {
                   <rt className="text-gray-500">{employee.givenNameKana}</rt>
                 </ruby>
               </td>
-              <td className="border py-4">{employee.department}</td>
-              <td className="border py-4">{employee.position}</td>
+              <td className="border py-4">{departments[employee.department]}</td>
+              <td className="border py-4">{positions[employee.position]}</td>
               <td className="border py-4">{employee.positive}</td>
               <td className="border py-4">{employee.negative}</td>
               <td className="border py-4">{employee.other}</td>

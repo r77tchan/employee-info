@@ -38,6 +38,11 @@ export default function RootLayout({
                 社員一覧
               </Link>
             </li>
+            <li>
+              <Link href="/add" className="hover:bg-gray-600 p-4 cursor-pointer block">
+                社員追加
+              </Link>
+            </li>
           </ul>
         </header>
         <main>{children}</main>

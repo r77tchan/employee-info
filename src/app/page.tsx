@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="text-center">
       <h1 className="text-2xl font-bold py-4">ようこそ、情報共有社員一覧システムへ</h1>

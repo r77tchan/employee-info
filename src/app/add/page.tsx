@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '@/utils/supabaseClient'
 
 export default function AddPage() {
   const [formData, setFormData] = useState({
@@ -15,6 +14,18 @@ export default function AddPage() {
     negative: 0,
     other: 0,
   })
+
+  // フォームが有効かを判定する関数（コンポーネント内で呼び出しているので再レンダリングされる度に呼び出される）
+  const isFormValid = () => {
+    return (
+      formData.familyNameKanji &&
+      formData.givenNameKanji &&
+      formData.familyNameKana &&
+      formData.givenNameKana &&
+      formData.department >= 0 &&
+      formData.position >= 0
+    )
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { id, value } = e.target
@@ -32,12 +43,17 @@ export default function AddPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const { error } = await supabase.from('employees').insert([formData])
+    // サーバーの API Route にデータを送信
+    const response = await fetch('/api/employees', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-    if (error) {
-      console.error('データ登録中にエラーが発生しました:', error)
-    } else {
-      alert('データが登録されました！')
+    const result = await response.json()
+
+    if (response.ok) {
+      alert(result.message)
       setFormData({
         familyNameKanji: '',
         givenNameKanji: '',
@@ -49,6 +65,8 @@ export default function AddPage() {
         negative: 0,
         other: 0,
       })
+    } else {
+      alert(result.error)
     }
   }
 
@@ -132,7 +150,14 @@ export default function AddPage() {
           </select>
         </div>
         <div className="text-center">
-          <button>追加</button>
+          <button
+            className={`rounded px-12 py-2 ${
+              isFormValid() ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            } hover:bg-green-600 hover:shadow-lg my-4`}
+            disabled={!isFormValid()}
+          >
+            追加
+          </button>
         </div>
       </form>
     </div>

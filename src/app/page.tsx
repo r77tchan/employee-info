@@ -1,3 +1,5 @@
+export const dynamic = 'force-static' // 明示的に静的生成に設定
+
 import Link from 'next/link'
 
 export default function HomePage() {

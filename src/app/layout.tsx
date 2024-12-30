@@ -46,6 +46,7 @@ export default function RootLayout({
           </ul>
         </header>
         <main>{children}</main>
+        <footer className="mb-32"></footer>
       </body>
     </html>
   )

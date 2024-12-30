@@ -73,62 +73,62 @@ export default function AddPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold py-4 text-center">社員追加</h1>
-      <form className="py-2 max-w-xl mx-auto w-full border rounded shadow" onSubmit={handleSubmit}>
-        <div className="py-2 pr-4 flex justify-between items-center">
-          <label htmlFor="familyNameKanji" className="w-1/5 text-right pr-4">
+      <form className="py-8 max-w-xl mx-auto w-full border rounded shadow" onSubmit={handleSubmit}>
+        <div className="py-2 text-center">
+          <label htmlFor="familyNameKanji" className="bg-yellow-100 py-2 inline-block w-16 border font-bold">
             <span>性</span>
           </label>
           <input
             type="text"
             id="familyNameKanji"
-            className="border rounded p-2 w-4/5"
+            className="border px-4 py-2 max-w-96 w-10/12"
             value={formData.familyNameKanji}
             onChange={handleChange}
           />
         </div>
-        <div className="py-2 pr-4 flex justify-between items-center">
-          <label htmlFor="givenNameKanji" className="w-1/5 text-right pr-4">
+        <div className="py-2 text-center">
+          <label htmlFor="givenNameKanji" className="bg-yellow-100 py-2 inline-block w-16 border font-bold">
             <span>名</span>
           </label>
           <input
             type="text"
             id="givenNameKanji"
-            className="border rounded p-2 w-4/5"
+            className="border px-4 p-2 max-w-96 w-10/12"
             value={formData.givenNameKanji}
             onChange={handleChange}
           />
         </div>
-        <div className="py-2 pr-4 flex justify-between items-center">
-          <label htmlFor="familyNameKana" className="w-1/5 text-right pr-4">
+        <div className="py-2 text-center">
+          <label htmlFor="familyNameKana" className="bg-yellow-100 py-2 inline-block w-16 border font-bold">
             <span>せい</span>
           </label>
           <input
             type="text"
             id="familyNameKana"
-            className="border rounded p-2 w-4/5"
+            className="border px-4 p-2 max-w-96 w-10/12"
             value={formData.familyNameKana}
             onChange={handleChange}
           />
         </div>
-        <div className="py-2 pr-4 flex justify-between items-center">
-          <label htmlFor="givenNameKana" className="w-1/5 text-right pr-4">
+        <div className="py-2 text-center">
+          <label htmlFor="givenNameKana" className="bg-yellow-100 py-2 inline-block w-16 border font-bold">
             <span>めい</span>
           </label>
           <input
             type="text"
             id="givenNameKana"
-            className="border rounded p-2 w-4/5"
+            className="border px-4 p-2 max-w-96 w-10/12"
             value={formData.givenNameKana}
             onChange={handleChange}
           />
         </div>
-        <div className="py-2 pr-4 flex justify-between items-center">
-          <label htmlFor="department" className="w-1/5 text-right pr-4">
+        <div className="py-2 text-center">
+          <label htmlFor="department" className="bg-yellow-100 py-2 inline-block w-16 border font-bold">
             <span>部署</span>
           </label>
           <select
             id="department"
-            className="border rounded p-2 w-4/5"
+            className="border px-3 py-2.5 max-w-96 w-10/12"
             value={formData.department}
             onChange={handleChange}
           >
@@ -138,11 +138,16 @@ export default function AddPage() {
             <option value="3">経理部</option>
           </select>
         </div>
-        <div className="py-2 pr-4 flex justify-between items-center">
-          <label htmlFor="position" className="w-1/5 text-right pr-4">
+        <div className="py-2 text-center">
+          <label htmlFor="position" className="bg-yellow-100 py-2 inline-block w-16 border font-bold">
             <span>役職</span>
           </label>
-          <select id="position" className="border rounded p-2 w-4/5" value={formData.position} onChange={handleChange}>
+          <select
+            id="position"
+            className="border px-3 py-2.5 max-w-96 w-10/12"
+            value={formData.position}
+            onChange={handleChange}
+          >
             <option value="0">一般社員</option>
             <option value="1">マネージャ</option>
             <option value="2">課長</option>
@@ -151,9 +156,11 @@ export default function AddPage() {
         </div>
         <div className="text-center">
           <button
-            className={`rounded px-12 py-2 ${
-              isFormValid() ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            } hover:bg-green-600 hover:shadow-lg my-4`}
+            className={`rounded px-12 py-2 mt-4 ${
+              isFormValid()
+                ? 'bg-green-500 text-white hover:bg-green-600 hover:shadow-lg font-bold'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
             disabled={!isFormValid()}
           >
             追加

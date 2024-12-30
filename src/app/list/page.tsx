@@ -34,7 +34,7 @@ export default async function ListPage() {
             <tr key={employee.id}>
               <td className="border py-4">{employee.id}</td>
               <td className="border py-4">
-                <ruby>
+                <ruby className="mr-1">
                   {employee.familyNameKanji}
                   <rt className="text-gray-500">{employee.familyNameKana}</rt>
                 </ruby>

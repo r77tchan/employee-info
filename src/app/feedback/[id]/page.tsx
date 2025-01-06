@@ -24,15 +24,13 @@ async function fetchEmployee(employeeId: string) {
 }
 
 // 動的ルートのサーバーコンポーネント
-export default async function FeedbackPage({ params }: { params: { id: string } }) {
-  const resolvedParams = await params // `params` を解決
-  const { id } = resolvedParams // 解決後の `id` を取得
+export default async function FeedbackPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params // 非同期的に解決
+  const { id } = resolvedParams // 解決後に id を取得
 
-  // 必要なデータを非同期で取得
   const feedbacks = await fetchFeedbacks(id) // 初期フィードバックデータ
   const employee = await fetchEmployee(id) // 従業員データ
 
-  // データをクライアントコンポーネントに渡してレンダリング
   return (
     <div>
       <h1 className="text-2xl font-bold py-4 text-center">フィードバック一覧</h1>

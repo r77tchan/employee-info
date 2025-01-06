@@ -1,17 +1,15 @@
 import { supabase } from '@/utils/supabaseClient'
 import Link from 'next/link'
+import { departments, positions } from '@/types'
 
 export default async function ListPage() {
   // Supabaseからデータを取得
-  const { data: employees, error } = await supabase.from('employees').select('*')
+  const { data: employees, error } = await supabase.from('employees').select('*').order('id', { ascending: true }) // IDを昇順に並び替え
 
   if (error) {
     console.error('データ取得中にエラーが発生しました:', error)
     return <div>データ取得中にエラーが発生しました</div>
   }
-
-  const departments = ['開発部', '人事部', '総務部', '経理部']
-  const positions = ['一般社員', 'マネージャ', '課長', '部長']
 
   return (
     <div className="text-center">
@@ -45,12 +43,12 @@ export default async function ListPage() {
               </td>
               <td className="border py-4">{departments[employee.department]}</td>
               <td className="border py-4">{positions[employee.position]}</td>
-              <td className="border py-4">{employee.positive}</td>
-              <td className="border py-4">{employee.negative}</td>
+              <td className={`border py-4 ${employee.positive && 'text-blue-500'}`}>{employee.positive}</td>
+              <td className={`border py-4 ${employee.negative && 'text-red-500'}`}>{employee.negative}</td>
               <td className="border py-4">{employee.other}</td>
               <td className="border py-4">
                 <Link
-                  href="/"
+                  href={`/feedback/${employee.id}`}
                   className="inline-block border border-gray-400 px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 hover:shadow-lg"
                 >
                   確認

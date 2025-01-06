@@ -9,4 +9,4 @@
 
 ## デプロイ先リンク (Vercel)
 
-[アプリを開く](#) <!-- デプロイ先のURLに変更 -->
+[アプリを開く](https://employee-info-ruby.vercel.app/)

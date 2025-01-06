@@ -23,9 +23,7 @@ async function fetchEmployee(employeeId: string) {
 
 export default async function FeedbackPage({ params }: { params: { id: string } }) {
   // 非同期的に params を取得する
-  // const { id } = await Promise.resolve(params)
-
-  const { id } = params // 非同期操作は不要
+  const { id } = await Promise.resolve(params as { id: string }) // stringと明示的に指定
 
   const feedbacks = await fetchFeedbacks(id) // 初期データを取得
 

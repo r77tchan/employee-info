@@ -25,3 +25,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'サーバーエラーが発生しました' }, { status: 500 })
   }
 }
+
+// GET メソッド: 特定の社員の情報を取得
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const employeeId = searchParams.get('employeeId')
+
+    if (!employeeId) {
+      return NextResponse.json({ error: '社員 ID が指定されていません' }, { status: 400 })
+    }
+
+    // Supabase から社員データを取得
+    const { data, error } = await supabase.from('employees').select('*').eq('id', parseInt(employeeId, 10))
+
+    if (error) {
+      console.error('Supabase エラー:', error)
+      return NextResponse.json({ error: 'データの取得に失敗しました' }, { status: 500 })
+    }
+    return NextResponse.json(data)
+  } catch (err) {
+    console.error('API エラー:', err)
+    return NextResponse.json({ error: 'サーバーエラーが発生しました' }, { status: 500 })
+  }
+}

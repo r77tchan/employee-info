@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Employee, departments, positions } from '@/types'
+import { Employee, Feedback, departments, positions } from '@/types'
 import convertToJst from '@/utils/convertToJst'
 
 export default function FeedbackClient({
@@ -9,7 +9,7 @@ export default function FeedbackClient({
   initialFeedbacks,
 }: {
   employee: Employee[]
-  initialFeedbacks: any[]
+  initialFeedbacks: Feedback[]
 }) {
   const [feedbacks, setFeedbacks] = useState(initialFeedbacks) // 初期データを状態に設定
   const [newFeedback, setNewFeedback] = useState('')

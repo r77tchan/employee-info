@@ -19,5 +19,5 @@ export interface Feedback {
   employeeId: number
   feedback_type: number
   content: string
-  createdAt: Date
+  created_at: string
 }
